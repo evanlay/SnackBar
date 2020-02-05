@@ -6,7 +6,8 @@ public class Vendor
 {
     int itemPrice;
     int totalStock;
-    boolean sold;
+    int money;
+    int change;
           /**
            * Constructs a Vendor
            * @param price the price of a single item in cents (int)
@@ -33,7 +34,7 @@ public class Vendor
      */
     public int getStock()
     {
-        return 0;
+        return totalStock;
     }
 
     /**
@@ -43,7 +44,7 @@ public class Vendor
      */
     public void addMoney(int number)
     {
-        
+        money = number + getDeposit();
     }
 
     /**
@@ -52,7 +53,7 @@ public class Vendor
      */
     public int getDeposit()
     {
-        return 0;
+        return money;
     }
 
     /**
@@ -66,6 +67,15 @@ public class Vendor
      */
     public boolean makeSale()
     {
+        if(getStock() < 0){
+            return false;
+        }
+        if(getDeposit() < itemPrice){
+            return false;
+        }
+        else{
+            totalStock -= 1;
+        }
         return true;
     }
 
@@ -76,6 +86,8 @@ public class Vendor
      */
     public int getChange()
     {
-        return 0;
+        change = getDeposit() - money;
+        money = 0;
+        return change;
     }
 }
