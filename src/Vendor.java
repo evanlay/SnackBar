@@ -4,10 +4,11 @@
  */
 public class Vendor
 {
-    int itemPrice;
-    int totalStock;
-    int money;
-    int change;
+    private int itemPrice;
+    private int totalStock;
+    private int money;
+    private int change;
+    static double totalSales;
           /**
            * Constructs a Vendor
            * @param price the price of a single item in cents (int)
@@ -75,6 +76,7 @@ public class Vendor
         }
         else{
             totalStock -= 1;
+            totalSales += itemPrice;
         }
         return true;
     }
@@ -86,8 +88,14 @@ public class Vendor
      */
     public int getChange()
     {
-        change = getDeposit() - money;
+        change = getDeposit() - itemPrice;
         money = 0;
         return change;
+    }
+    public static double getTotalSales(){
+        totalSales = totalSales/100.00;
+        double totalSales2 = totalSales;
+        totalSales = 0.0;
+        return totalSales2;
     }
 }
